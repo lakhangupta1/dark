@@ -1,0 +1,147 @@
+<div
+  class="auth-wrapper d-flex justify-content-center align-items-center"
+  style="
+    background: url('assets/images/background/login-register.jpg') no-repeat center center;
+    background-size: cover;
+    width: 100%;
+    height: 100vh;
+  "
+>
+  <div class="col-8 col-md-6 col-lg-4 p-4 bg-white rounded shadow">
+    <div class="text-center mb-4">
+      <img src="assets/images/logo-icon.png" alt="logo" class="mb-2" />
+      <h2>Sign Up to Admin</h2>
+    </div>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" novalidate>
+      <!-- Username -->
+      <div class="mb-3">
+        <label for="username" class="form-label">Name</label>
+        <input
+          type="text"
+          id="username"
+          formControlName="username"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f['username'].errors }"
+        />
+        <div *ngIf="submitted && f['username'].errors" class="invalid-feedback">
+          <div *ngIf="f['username'].errors['required']">Name is required</div>
+          <div *ngIf="f['username'].errors['minlength']">
+            Name must be at least 4 characters
+          </div>
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div class="mb-2">
+        <label for="email" class="form-label">Email</label>
+        <input
+          type="email"
+          id="email"
+          formControlName="email"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f['email'].errors }"
+        />
+        <div *ngIf="submitted && f['email'].errors" class="invalid-feedback">
+          <div *ngIf="f['email'].errors['required']">Email is required</div>
+          <div *ngIf="f['email'].errors['email']">Enter a valid email</div>
+        </div>
+      </div>
+
+      <!-- Password -->
+      <div class="mb-2">
+        <label for="password" class="form-label">Password</label>
+        <input
+          type="password"
+          id="password"
+          formControlName="password"
+          class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f['password'].errors }"
+        />
+        <div *ngIf="submitted && f['password'].errors" class="invalid-feedback">
+          <div *ngIf="f['password'].errors['required']">Password is required</div>
+          <div *ngIf="f['password'].errors['minlength']">
+            Password must be at least 6 characters
+          </div>
+        </div>
+      </div>
+
+      <!-- Confirm Password -->
+      <div class="mb-2">
+        <label for="confirmpassword" class="form-label">Confirm Password</label>
+        <input
+          type="password"
+          id="confirmpassword"
+          formControlName="confirmpassword"
+          class="form-control"
+          [ngClass]="{
+            'is-invalid': submitted && (f['confirmpassword'].errors || passwordMismatch)
+          }"
+        />
+        <div
+          *ngIf="submitted && (f['confirmpassword'].errors || passwordMismatch)"
+          class="invalid-feedback"
+        >
+          <div *ngIf="f['confirmpassword'].errors?.['required']">
+            Confirm Password is required
+          </div>
+          <div *ngIf="f['confirmpassword'].errors?.['minlength']">
+            Password must be at least 6 characters
+          </div>
+          <div *ngIf="passwordMismatch">Passwords do not match</div>
+        </div>
+      </div>
+
+      <!-- User Type -->
+      <div class="mb-3">
+        <label class="form-label d-block">Select User Type</label>
+        <div class="d-flex justify-content-between flex-wrap">
+          <button
+            type="button"
+            class="btn"
+            [ngClass]="{
+              'btn-primary': registerForm.value.userType === 'user',
+              'btn-outline-primary': registerForm.value.userType !== 'user'
+            }"
+            (click)="selectButton('user')"
+          >
+            User
+          </button>
+          <button
+            type="button"
+            class="btn"
+            [ngClass]="{
+              'btn-primary': registerForm.value.userType === 'boy',
+              'btn-outline-primary': registerForm.value.userType !== 'boy'
+            }"
+            (click)="selectButton('boy')"
+          >
+            Boy
+          </button>
+          <button
+            type="button"
+            class="btn"
+            [ngClass]="{
+              'btn-primary': registerForm.value.userType === 'admin',
+              'btn-outline-primary': registerForm.value.userType !== 'admin'
+            }"
+            (click)="selectButton('admin')"
+          >
+            Admin
+          </button>
+        </div>
+      </div>
+
+      <!-- Submit -->
+      <div class="mb-2">
+        <button type="submit" class="btn btn-info w-100">Sign Up</button>
+      </div>
+
+      <!-- Login Link -->
+      <div class="text-center">
+        Already have an account?
+        <a [routerLink]="['/authentication/login']" class="text-info ms-1"><b>Sign In</b></a>
+      </div>
+    </form>
+  </div>
+</div>

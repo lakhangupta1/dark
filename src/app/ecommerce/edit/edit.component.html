@@ -1,0 +1,116 @@
+<div class="row">
+  <div class="col-lg-12">
+    <div class="card">
+      <div class="card-body">
+        <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+          
+          <!-- About Product -->
+          <div class="form-body">
+            <h5 class="card-title">About Product</h5>
+            <hr>
+            
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="control-label">Product Name</label>
+                <input type="text" class="form-control" placeholder="Rounded Chair" formControlName="productName">
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="control-label">Sub text</label>
+                <input type="text" class="form-control" placeholder="globe type chair for rest" formControlName="subText">
+              </div>
+            </div>
+            
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="control-label">Category</label>
+                <select class="form-select" formControlName="category">
+                  <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
+                </select>
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <label>Status</label><br/>
+                <div class="form-check form-check-inline">
+                  <input type="radio" class="form-check-input" formControlName="status" value="publish" id="publish">
+                  <label class="form-check-label" for="publish">Publish</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input type="radio" class="form-check-input" formControlName="status" value="draft" id="draft">
+                  <label class="form-check-label" for="draft">Draft</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label>Price</label>
+                <div class="input-group">
+                  <span class="input-group-text"><i class="ti-money"></i></span>
+                  <input type="text" class="form-control" placeholder="Price" formControlName="price">
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label>Discount</label>
+                <div class="input-group">
+                  <span class="input-group-text"><i class="ti-cut"></i></span>
+                  <input type="text" class="form-control" placeholder="Discount" formControlName="discount">
+                </div>
+              </div>
+            </div>
+
+            <h5 class="card-title mt-4">Product Description</h5>
+            <div class="mb-3">
+              <textarea class="form-control" rows="4" formControlName="description"></textarea>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label>Meta Title</label>
+                <input type="text" class="form-control" formControlName="metaTitle">
+              </div>
+              <div class="col-md-6 mb-3">
+                <label>Meta Keyword</label>
+                <input type="text" class="form-control" formControlName="metaKeyword">
+              </div>
+            </div>
+
+            <!-- Image Upload -->
+            <div class="row mb-3">
+              <div class="col-md-3">
+                <h5>Upload Image</h5>
+                <div class="el-card-avatar text-center mb-3">
+                  <img *ngIf="uploadedImage" [src]="uploadedImage" alt="Preview" class="img-fluid rounded">
+                </div>
+                <div class="btn btn-info">
+                  <span>Upload Another Image</span>
+                  <input type="file" class="upload" (change)="onFileChange($event)">
+                </div>
+              </div>
+            </div>
+
+            <!-- General Info -->
+            <h5 class="card-title mt-4">GENERAL INFO</h5>
+            <div class="table-responsive mb-4">
+              <table class="table table-bordered">
+                <tbody formArrayName="generalInfo">
+                  <tr *ngFor="let info of generalInfo.controls; let i=index" [formGroupName]="i">
+                    <td><input type="text" class="form-control" formControlName="key" readonly></td>
+                    <td><input type="text" class="form-control" formControlName="value"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+
+          <!-- Form Actions -->
+          <div class="form-actions">
+            <button type="submit" class="btn btn-success"><i class="fa fa-check"></i> Save</button>
+            <button type="button" class="btn btn-dark">Cancel</button>
+          </div>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

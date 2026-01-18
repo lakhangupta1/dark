@@ -1,0 +1,63 @@
+<div class="container d-flex justify-content-center align-items-center vh-100">
+  <div class="card shadow-lg p-4 w-50">
+    <h3 class="text-center mb-4">Login lakhan</h3>
+
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+      <!-- Email -->
+      <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input
+          type="email"
+          formControlName="email"
+          class="form-control"
+          [ngClass]="{'is-invalid': submitted && ( f && f['email'] && f['email'].errors)}"
+        />
+         @if (submitted && f['email'].errors) {
+            <div class="invalid-feedback">
+                @if (f['email'].errors['required']) {
+                    <div>Email is required</div>
+                }
+                @if (f['email'].errors['email']) {
+                    <div>Invalid email format</div>
+                }
+            </div>
+        }
+      </div>
+
+      <!-- Password -->
+      <div class="mb-3">
+        <label class="form-label">Password</label>
+        <input
+          type="password"
+          formControlName="password"
+          class="form-control"
+          [ngClass]="{'is-invalid': submitted && f!['password'].errors}"
+        />
+        @if (submitted && f['password'].errors) {
+            <div class="invalid-feedback">
+                @if (f['password'].errors['required']) {
+                  <div>Password is required</div>
+                }
+                @if (f['password'].errors['minlength']) {
+                 <div>Minimum 6 characters required</div>
+                }
+                 @if (f['password'].errors['maxlength']) {
+                 <div>Maximum 10 characters required</div>
+                }
+            </div>
+        }
+      
+      </div>
+
+      <a (click)="navigateToForgotPassword()" class="forgot-password-link clickable">
+        Forgot Password?
+      </a>
+
+      <!-- Submit Button -->
+      <button class="btn btn-primary w-100" type="submit">Login</button>
+    </form>
+
+    <h2>hello Lakhan {{ value}}</h2>
+  </div>
+</div>
